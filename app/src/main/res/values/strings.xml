@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Рівне коло</string>
+    <string name="accessibility_service_label">Рівне коло</string>
+    <string name="accessibility_service_description">Малює коло за вашим натисканням на плаваючу кнопку. Сервіс не читає вміст екрана й не виконує дій самостійно.</string>
+</resources>

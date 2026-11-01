@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="18dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="28dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ІНСТРУМЕНТ ДЛЯ ІГОР"
+            android:textColor="@color/accent"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.12" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Рівне коло"
+            android:textColor="@color/ink"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Налаштуй розмір, відкрий гру та намалюй коло одним дотиком."
+            android:textColor="@color/muted"
+            android:textSize="15sp"
+            android:lineSpacingExtra="3dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="206dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/card_surface"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:elevation="2dp">
+
+            <ua.stavr.dpsab.CirclePreviewView
+                android:id="@+id/circlePreview"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:contentDescription="Попередній перегляд кола" />
+
+            <TextView
+                android:id="@+id/previewDiameter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="250 dp · ідеальна окружність"
+                android:textColor="@color/muted"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/card_surface"
+            android:elevation="1dp"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Діаметр"
+                    android:textColor="@color/ink"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/diameterValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="250 dp"
+                    android:textColor="@color/accent"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/diameterSlider"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:max="600"
+                android:progress="150" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Швидкість малювання"
+                android:textColor="@color/ink"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/speedSlow"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/chip_unselected"
+                    android:gravity="center"
+                    android:text="Повільно"
+                    android:textColor="@color/ink"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/speedNormal"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginHorizontal="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/chip_selected"
+                    android:gravity="center"
+                    android:text="Звичайно"
+                    android:textColor="@color/surface"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/speedFast"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/chip_unselected"
+                    android:gravity="center"
+                    android:text="Швидко"
+                    android:textColor="@color/ink"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/serviceStatusCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/card_surface"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/status_enabled"
+                android:gravity="center"
+                android:text="✦"
+                android:textColor="@color/green"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/serviceStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Сервіс вимкнено"
+                    android:textColor="@color/ink"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/serviceHint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="Потрібно дозволити керування жестами"
+                    android:textColor="@color/muted"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/accessibilityButton"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/button_primary"
+            android:gravity="center"
+            android:text="Увімкнути керування"
+            android:textColor="@color/surface"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="Доступність потрібна лише для відтворення жесту. Налаштування зберігаються на пристрої."
+            android:textColor="@color/muted"
+            android:textSize="12sp"
+            android:lineSpacingExtra="3dp" />
+    </LinearLayout>
+</ScrollView>
