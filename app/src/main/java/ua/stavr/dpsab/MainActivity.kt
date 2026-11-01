@@ -5,6 +5,10 @@ import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.TypedValue
+import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
@@ -24,6 +28,10 @@ class MainActivity : Activity() {
     private lateinit var speedSlow: TextView
     private lateinit var speedNormal: TextView
     private lateinit var speedFast: TextView
+    private lateinit var textInput: EditText
+    private lateinit var textSizeSlider: SeekBar
+    private lateinit var textSizeValue: TextView
+    private lateinit var textPreview: TextView
     private var selectedSpeed = NORMAL_SPEED_MS
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +48,10 @@ class MainActivity : Activity() {
         speedSlow = findViewById(R.id.speedSlow)
         speedNormal = findViewById(R.id.speedNormal)
         speedFast = findViewById(R.id.speedFast)
+        textInput = findViewById(R.id.textInput)
+        textSizeSlider = findViewById(R.id.textSizeSlider)
+        textSizeValue = findViewById(R.id.textSizeValue)
+        textPreview = findViewById(R.id.textPreview)
 
         val savedDiameter = preferences.getInt(KEY_DIAMETER_DP, DEFAULT_DIAMETER_DP)
             .coerceIn(MIN_DIAMETER_DP, MAX_DIAMETER_DP)
@@ -55,6 +67,31 @@ class MainActivity : Activity() {
             preferences.edit().putInt(KEY_SPEED_MS, selectedSpeed).apply()
         }
         updateSpeedSelection()
+
+        textInput.setText(preferences.getString(KEY_TEXT, ""))
+        textPreview.text = textInput.text.toString().ifBlank { "Попередній перегляд" }
+        textInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val value = s?.toString().orEmpty()
+                preferences.edit().putString(KEY_TEXT, value).apply()
+                textPreview.text = value.ifBlank { "Попередній перегляд" }
+            }
+            override fun afterTextChanged(s: Editable?) = Unit
+        })
+
+        val savedTextSize = preferences.getInt(KEY_TEXT_SIZE_DP, DEFAULT_TEXT_SIZE_DP)
+            .coerceIn(MIN_TEXT_SIZE_DP, MAX_TEXT_SIZE_DP)
+        textSizeSlider.progress = savedTextSize - MIN_TEXT_SIZE_DP
+        updateTextSize(savedTextSize)
+        textSizeSlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                updateTextSize(MIN_TEXT_SIZE_DP + progress)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) = Unit
+            override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
+        })
 
         diameterSlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -96,6 +133,12 @@ class MainActivity : Activity() {
         updateSpeedSelection()
     }
 
+    private fun updateTextSize(sizeDp: Int) {
+        textSizeValue.text = "$sizeDp dp"
+        textPreview.setTextSize(TypedValue.COMPLEX_UNIT_DIP, sizeDp.toFloat())
+        preferences.edit().putInt(KEY_TEXT_SIZE_DP, sizeDp).apply()
+    }
+
     private fun updateSpeedSelection() {
         setSpeedChip(speedSlow, selectedSpeed == SLOW_SPEED_MS)
         setSpeedChip(speedNormal, selectedSpeed == NORMAL_SPEED_MS)
@@ -134,9 +177,14 @@ class MainActivity : Activity() {
     companion object {
         const val KEY_DIAMETER_DP = "diameter_dp"
         const val KEY_SPEED_MS = "speed_ms"
+        const val KEY_TEXT = "drawing_text"
+        const val KEY_TEXT_SIZE_DP = "text_size_dp"
         const val MIN_DIAMETER_DP = 100
         const val MAX_DIAMETER_DP = 700
         const val DEFAULT_DIAMETER_DP = 250
+        const val MIN_TEXT_SIZE_DP = 24
+        const val MAX_TEXT_SIZE_DP = 96
+        const val DEFAULT_TEXT_SIZE_DP = 56
         const val SLOW_SPEED_MS = 2400
         const val NORMAL_SPEED_MS = 1400
         const val FAST_SPEED_MS = 800

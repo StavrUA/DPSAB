@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="Налаштуй розмір, відкрий гру та намалюй коло одним дотиком."
+            android:text="Налаштуй коло або введи текст, відкрий гру та малюй одним дотиком."
             android:textColor="@color/muted"
             android:textSize="15sp"
             android:lineSpacingExtra="3dp" />
@@ -163,6 +163,97 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/card_surface"
+            android:elevation="1dp"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Написати текст"
+                android:textColor="@color/ink"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/textInput"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/input_background"
+                android:hint="Введи текст для малювання"
+                android:inputType="textCapSentences|textNoSuggestions"
+                android:maxLength="20"
+                android:paddingHorizontal="14dp"
+                android:singleLine="true"
+                android:textColor="@color/ink"
+                android:textColorHint="@color/muted"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Розмір напису"
+                    android:textColor="@color/ink"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textSizeValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="56 dp"
+                    android:textColor="@color/accent"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/textSizeSlider"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="2dp"
+                android:max="72"
+                android:progress="32" />
+
+            <TextView
+                android:id="@+id/textPreview"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/input_background"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingHorizontal="10dp"
+                android:text="Попередній перегляд"
+                android:textColor="@color/accent"
+                android:textSize="40sp"
+                android:typeface="sans" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Текст малюється контурами системного шрифту Sans і автоматично зменшується, якщо не вміщується на екрані."
+                android:textColor="@color/muted"
+                android:textSize="12sp"
+                android:lineSpacingExtra="2dp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/serviceStatusCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -225,7 +316,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="Доступність потрібна лише для відтворення жесту. Налаштування зберігаються на пристрої."
+            android:text="Доступність потрібна лише для відтворення вибраного жесту. Налаштування зберігаються на пристрої."
             android:textColor="@color/muted"
             android:textSize="12sp"
             android:lineSpacingExtra="3dp" />
