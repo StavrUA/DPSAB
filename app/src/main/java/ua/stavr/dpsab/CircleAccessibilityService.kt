@@ -105,7 +105,7 @@ class CircleAccessibilityService : AccessibilityService() {
             minOf(bounds.width(), bounds.height()) * 0.42f
         )
         val path = Path().apply {
-            addCircle(bounds.exactCenterX(), bounds.exactCenterY(), radius, Path.Direction.CLOCKWISE)
+            addCircle(bounds.exactCenterX(), bounds.exactCenterY(), radius, Path.Direction.CW)
         }
         val gesture = GestureDescription.Builder()
             .addStroke(GestureDescription.StrokeDescription(path, 0, durationMs.toLong()))
